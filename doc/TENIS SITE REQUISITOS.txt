@@ -1,0 +1,16 @@
+SITE DE TENIS
+
+SO FUNCIONA COM A EXTENSAO Live Server
+Com a pasta do projeto aberta no VS Code, clique com o botão direito no arquivo index.html e selecione "Open with Live Server"
+
+
+
+          -OBJETIVOS-
+
+1- ter noçao basica da interaçao html e css
+
+2- hospedar um site
+3- associaçao de um banco de dados a um site
+4- criar um back end q processe e altere dados no banco de dados pelo site 
+
+

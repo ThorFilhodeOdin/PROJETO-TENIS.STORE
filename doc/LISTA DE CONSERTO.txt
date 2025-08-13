@@ -1,0 +1,136 @@
+
+
+              --FASE DE DO HTML SUPERFICIAL/ DEFINIÇAO DE REGRAS DE NEGOCIO / FUNCIONALIDADES--
+
+
+
+--------1.HOSPEDAR SITE
+
+
+--------2. CRIAR E ESTRUTURAR BANCO DE DADOS
+
+
+--------3.CRIAR BACK END 
+
+como meu front end se realciona com o back?
+1- pode ser em java/outra linguagem?
+2- eles fica no mesmo aquivo? precisam estar? 
+3- como se conectam?
+
+[1. O back-end pode ser em Java/outra linguagem?
+✅ Sim, qualquer linguagem serve! O front-end só se importa com a API que o back-end oferece.
+
+Exemplos reais:
+
+Banco Itaú: Front em React + Back em Java (Spring)
+
+Netflix: Front em React + Back em Python/Java
+
+Nubank: Front em Flutter + Back em Clojure
+
+2. Eles ficam no mesmo arquivo? Precisam estar juntos?
+🚀 Não precisam! Na verdade, é melhor separar:
+
+bash
+# Estrutura profissional comum:
+meu-app/
+├── frontend/       # Pasta com React/Angular
+│   ├── public/
+│   └── src/
+└── backend/        # Pasta com Java/Python
+    ├── src/
+    └── pom.xml
+Quando juntamos? Só em casos simples:
+
+Sites WordPress (PHP + HTML misturados)
+
+Projetos pequenos de estudo
+
+3. Como se conectam? (O segredo todo!)
+🔌 Conectam via HTTP usando APIs, assim:
+
+javascript
+// Front-end (React) faz isso:
+async function loadProducts() {
+  const response = await fetch('https://api.loja.com/produtos');
+  const data = await response.json();
+  console.log(data); // Mostra no navegador
+}
+Enquanto isso, no back-end (Java com Spring):
+
+java
+// Back-end responde assim:
+@RestController
+public class ProdutoController {
+    
+    @GetMapping("/produtos")
+    public List<Produto> listarProdutos() {
+        return database.findAll(); // Busca no banco
+    }
+}
+🔥 Fluxo REAL passo a passo:
+Usuário abre loja.com (front-end React)
+
+React chama GET api.loja.com/produtos
+
+Back-end Java recebe, busca no MySQL
+
+Java retorna:
+
+json
+[
+  {"id": 1, "nome": "Notebook"},
+  {"id": 2, "nome": "Mouse"}
+]
+React mostra a lista na tela
+
+Tipos de conexão usados no mercado:
+Tipo	Quando usar	Exemplo
+REST API	90% dos casos	Java + React
+GraphQL	Quando precisa de dados flexíveis	Netflix usa
+WebSockets	Chat, jogos em tempo real	Discord
+Dica PRO:
+Use o Postman para testar APIs antes de conectar o front-end!]
+
+
+
+
+--------4.ENTRELAÇAR BACK E BC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

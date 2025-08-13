@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados da Pesquisa - TenisStore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="menu">
+      <div class="logo" onclick="window.location.href='produtos.html'"> TenisStore</div>
+      <form class="search-bar" onsubmit="redirecionarParaPesquisa(event)">
+        <input type="text" id="campoPesquisa" placeholder="Pesquisar..." required>
+        <button type="submit">🔍</button>
+      </form>
+      <ul class="nav-links">
+        <li><a href="carrinho.html">Carrinho</a></li>
+        <li><a href="usuario.html">Usuário</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="titulo-pesquisa">Resultados para: <span id="termo-pesquisa"></span></h1>
+    
+    <div class="filtros-pesquisa">
+      <div class="filtro">
+        <label for="ordenar">Ordenar por:</label>
+        <select id="ordenar">
+          <option value="relevancia">Relevância</option>
+          <option value="menor-preco">Menor Preço</option>
+          <option value="maior-preco">Maior Preço</option>
+          <option value="avaliacao">Melhor Avaliação</option>
+        </select>
+      </div>
+      
+      <div class="filtro">
+        <label for="categoria">Categoria:</label>
+        <select id="categoria">
+          <option value="todos">Todos</option>
+          <option value="esportivo">Esportivo</option>
+          <option value="urbano">Urbano</option>
+          <option value="sandalia">Sandálias</option>
+          <option value="chinelo">Chinelos</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="produtos resultado-pesquisa">
+      <!-- Os produtos serão exibidos aqui dinamicamente -->
+      <p class="sem-resultados" style="display: none;">Nenhum produto encontrado para sua pesquisa.</p>
+      
+      <!-- Exemplo de produto que seria exibido -->
+      <article class="produto" style="display: none;">
+        <img src="../jpg/FB9-8539-036_zoom1.jpg" alt="Tênis Esportivo Pro">
+        <h2>Tênis Esportivo Pro</h2>
+        <p>R$ 299,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Esportivo Pro" 
+                data-preco="299.90" 
+                data-imagem="../jpg/FB9-8539-036_zoom1.jpg">
+          Comprar
+        </button>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    // Captura o termo de pesquisa da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const termo = urlParams.get('q');
+    
+    if (termo) {
+      document.getElementById('termo-pesquisa').textContent = termo;
+      // Aqui você implementaria a lógica para buscar os produtos
+    }
+
+    function redirecionarParaPesquisa(event) {
+      event.preventDefault();
+      const termo = document.getElementById("campoPesquisa").value.trim();
+      if (termo) {
+        window.location.href = `pesquisa.html?q=${encodeURIComponent(termo)}`;
+      }
+    }
+
+    // Evento de compra para os botões
+    document.querySelectorAll('.btn-comprar').forEach(button => {
+      button.addEventListener('click', function() {
+        const product = {
+          nome: this.dataset.nome,
+          preco: this.dataset.preco,
+          imagem: this.dataset.imagem
+        };
+        window.location.href = `checkout.html?nome=${encodeURIComponent(product.nome)}&preco=${encodeURIComponent(product.preco)}&imagem=${encodeURIComponent(product.imagem)}`;
+      });
+    });
+  </script>
+</body>
+</html>

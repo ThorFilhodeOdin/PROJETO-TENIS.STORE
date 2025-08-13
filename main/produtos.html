@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos - TenisStore</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Verifique o caminho do CSS -->
+</head>
+<body>
+  <header>
+    <nav class="menu">
+      <div class="logo" onclick="window.location.href='produtos.html'"> TenisStore</div>
+      <form class="search-bar" onsubmit="redirecionarParaPesquisa(event)">
+        <input type="text" id="campoPesquisa" placeholder="Pesquisar..." required>
+        <button type="submit">🔍</button>
+      </form>
+      <ul class="nav-links">
+        <li><a href="carrinho.html">Carrinho</a></li>
+        <li><a href="usuario.html">Usuário</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+         <li><a href="modificaçao.html">INTERAÇAO BAK</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+
+
+    <div class="categorias-container">
+      <ul class="categorias-lista">
+        <li><a href="#" class="categoria-link active">Todos</a></li>
+        <li><a href="#" class="categoria-link">Esportivo</a></li>
+        <li><a href="#" class="categoria-link">Urbano</a></li>
+        <li><a href="#" class="categoria-link">Sandálias</a></li>
+        <li><a href="#" class="categoria-link">Chinelos</a></li>
+      </ul>
+
+         <!-- Produto 1 -->
+    <section class="produtos">
+      <article class="produto">
+        <img src="../jpg/FB9-8539-036_zoom1.jpg" alt="Tênis Esportivo Pro">
+        <h2>Tênis Esportivo Pro</h2>
+        <p>R$ 299,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Esportivo Pro" 
+                data-preco="299.90" 
+                data-imagem="../jpg/FB9-8539-036_zoom1.jpg">
+          Comprar
+        </button>
+      </article>
+
+      <!-- Produto 2 -->
+      <article class="produto">
+        <img src="../jpg/vans_range_exp_ag_13_1022675_32017_17_34699_3_1.jpg" alt="Tênis Casual Urban">
+        <h2>Tênis Casual Urban</h2>
+        <p>R$ 249,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Casual Urban" 
+                data-preco="249.90" 
+                data-imagem="../jpg/vans_range_exp_ag_13_1022675_32017_17_34699_3_1.jpg">
+          Comprar
+        </button>
+      </article>
+
+      <!-- Produto 3 -->
+      <article class="produto">
+        <img src="../jpg/packshot-codigo-modelo-8987576.jpg" alt="Tênis Corrida FastRun">
+        <h2>Tênis Corrida FastRun</h2>
+        <p>R$ 329,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Corrida FastRun" 
+                data-preco="329.90" 
+                data-imagem="../jpg/packshot-codigo-modelo-8987576.jpg">
+          Comprar
+        </button>
+      </article>
+
+      <!-- Produto 4 -->
+      <article class="produto">
+        <img src="../jpg/FB8-7940-024_zoom1.jpg" alt="Tênis Casual Premium">
+        <h2>Tênis Casual Premium</h2>
+        <p>R$ 279,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Casual Premium" 
+                data-preco="279.90" 
+                data-imagem="../jpg/FB8-7940-024_zoom1.jpg">
+          Comprar
+        </button>
+      </article>
+
+      <!-- Produto 5 -->
+      <article class="produto">
+        <img src="../jpg/180_tenis_de_corrida_masculino_on_running_cloudmonster_void_silver_lense_12129_1_9166ba7a7f187922db483916f032fa60.jpg" alt="Tênis Esportivo Elite">
+        <h2>Tênis Esportivo Elite</h2>
+        <p>R$ 499,90</p>
+        <button class="btn-comprar" 
+                data-nome="Tênis Esportivo Elite" 
+                data-preco="499.90" 
+                data-imagem="../jpg/180_tenis_de_corrida_masculino_on_running_cloudmonster_void_silver_lense_12129_1_9166ba7a7f187922db483916f032fa60.jpg">
+          Comprar
+        </button>
+      </article>
+    </section>
+  </main>
+
+
+  <script>
+    // Função para redirecionar para pesquisa.html
+    function redirecionarParaPesquisa(event) {
+      event.preventDefault();
+      const termo = document.getElementById("campoPesquisa").value.trim();
+      if (termo) {
+        window.location.href = `pesquisa.html?q=${encodeURIComponent(termo)}`;
+      }
+    }
+
+    // Evento de compra para todos os botões
+    document.querySelectorAll('.btn-comprar').forEach(button => {
+      button.addEventListener('click', function() {
+        const product = {
+          nome: this.dataset.nome,
+          preco: this.dataset.preco,
+          imagem: this.dataset.imagem
+        };
+        // Redireciona para checkout com os dados do produto
+        window.location.href = `checkout.html?nome=${encodeURIComponent(product.nome)}&preco=${encodeURIComponent(product.preco)}&imagem=${encodeURIComponent(product.imagem)}`;
+      });
+
+      
+    });
+
+  // Filtro por categoria
+  document.querySelectorAll('.categoria-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Remove classe active de todos os links
+      document.querySelectorAll('.categoria-link').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Adiciona classe active no link clicado
+      this.classList.add('active');
+      
+      const categoria = this.textContent.trim();
+      
+      // Aqui você pode implementar a lógica para filtrar os produtos
+      // Exemplo básico:
+      if(categoria === 'Todos') {
+        document.querySelectorAll('.produto').forEach(produto => {
+          produto.style.display = 'block';
+        });
+      } else {
+        document.querySelectorAll('.produto').forEach(produto => {
+          // Esta é uma lógica simplificada - você precisará adaptar
+          // conforme a estrutura real dos seus produtos
+          if(produto.querySelector('h2').textContent.includes(categoria)) {
+            produto.style.display = 'block';
+          } else {
+            produto.style.display = 'none';
+          }
+        });
+      }
+    });
+  });
+</script>
+  </script>
+</body>
+</html>

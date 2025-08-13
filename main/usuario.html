@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuário - TenisStore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="menu">
+      <div class="logo" onclick="window.location.href='produtos.html'">TenisStore</div>
+      <ul class="nav-links">
+        <li><a href="carrinho.html">Carrinho</a></li>
+        <li><a href="usuario.html">Usuário</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Minha Conta</h1>
+
+    <div class="user-profile">
+      <div class="user-info">
+        <h2>Informações Pessoais</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nome completo:</label>
+            <p>João da Silva</p>
+          </div>
+          <div class="info-item">
+            <label>CPF:</label>
+            <p>123.456.789-00</p>
+          </div>
+          <div class="info-item">
+            <label>Email:</label>
+            <p>usuario@exemplo.com</p>
+          </div>
+          <div class="info-item">
+            <label>Telefone:</label>
+            <p>(11) 98765-4321</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-address">
+        <h2>Endereço de Entrega</h2>
+        <div class="address-card">
+          <p><strong>Endereço principal</strong></p>
+          <p>Rua das Flores, 123</p>
+          <p>Apartamento 101, Bloco B</p>
+          <p>Jardim Primavera - São Paulo/SP</p>
+          <p>CEP: 01234-567</p>
+        </div>
+        
+      </div>
+
+      <div class="user-actions">
+        <h2>Ações da Conta</h2>
+        <div class="actions-grid">
+          <button class="btn-action" onclick="window.location.href='metodos-pagamento.html'">
+            <i class="icon">💳</i>
+            Métodos de pagamento
+          </button>
+          <button class="btn-action" onclick="window.location.href='editar-perfil.html'">
+            <i class="icon">✏️</i>
+            Editar informações
+          </button>
+          <button class="btn-action" onclick="window.location.href='enderecos.html'">
+            <i class="icon">🏠</i>
+            Gerenciar endereços
+          </button>
+          <button class="btn-action" onclick="window.location.href='senha.html'">
+            <i class="icon">🔒</i>
+            Alterar senha
+          </button>
+          <button class="btn-action" onclick="window.location.href='preferencias.html'">
+            <i class="icon">⚙️</i>
+            Preferências
+          </button>
+          <button class="btn-action btn-logout" onclick="logout()">
+            <i class="icon">🚪</i>
+            Sair da conta
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function logout() {
+      // Lógica para deslogar o usuário
+      alert('Você foi desconectado com sucesso!');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

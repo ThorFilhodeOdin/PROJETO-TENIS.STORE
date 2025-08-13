@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Compra - TenisStore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="menu">
+      <div class="logo" onclick="window.location.href='produtos.html'">
+        <span class="logo-icon">👟</span>
+        <span>TenisStore</span>
+      </div>
+      <form class="search-bar">
+        <input type="text" id="campoPesquisa" placeholder="Pesquisar..." required>
+        <button type="submit">🔍</button>
+      </form>
+      <ul class="nav-links">
+        <li><a href="carrinho.html">Carrinho</a></li>
+        <li><a href="usuario.html">Usuário</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container-checkout">
+    <!-- Seção do produto selecionado (esquerda) -->
+    <div class="resumo-pedido">
+      <a href="produtos.html" class="voltar-topo">← Voltar para Produtos</a>
+      <div id="produto-selecionado" class="produto-selecionado"></div>
+    </div>
+
+    <!-- Seção de sugestões (direita) -->
+    <div class="sugestoes-container">
+      <h2>Tenis parecidos</h2>
+      <div class="sugestoes-lista">
+        <!-- Produtos sugeridos serão inseridos aqui via JavaScript -->
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Carrega produto selecionado
+      const params = new URLSearchParams(window.location.search);
+      const product = {
+        nome: params.get('nome'),
+        preco: params.get('preco'),
+        imagem: params.get('imagem')
+      };
+
+      if (product.nome && product.preco) {
+        document.getElementById('produto-selecionado').innerHTML = `
+          <div class="produto-detalhes">
+            <div class="produto-galeria">
+              <div class="galeria-principal">
+                <img src="${product.imagem}" alt="${product.nome}" class="imagem-principal">
+              </div>
+              <div class="galeria-miniaturas">
+                <img src="${product.imagem}" alt="Miniatura 1" class="miniatura active">
+                <img src="../jpg/vans_range_exp_ag_13_1022675_32017_17_34699_3_1.jpg" alt="Miniatura 2" class="miniatura">
+                <img src="../jpg/packshot-codigo-modelo-8987576.jpg" alt="Miniatura 3" class="miniatura">
+              </div>
+            </div>
+            <div class="produto-info">
+              <h2>${product.nome}</h2>
+              <div class="produto-preco">R$ ${parseFloat(product.preco).toFixed(2).replace('.', ',')}</div>
+              
+              <div class="tamanhos-container">
+                <h3>Tamanho</h3>
+                <div class="tamanhos-lista">
+                  ${[36, 37, 38, 39, 40, 41, 42, 43, 44].map(t => `
+                    <label class="tamanho-option">
+                      <input type="radio" name="tamanho" value="${t}" ${t === 39 ? 'checked' : ''}>
+                      <span>${t}</span>
+                    </label>
+                  `).join('')}
+                </div>
+              </div>
+
+              <div class="quantidade-container">
+                <label for="quantidade">Quantidade:</label>
+                <div class="quantidade-controle">
+                  <button class="btn-quantidade" onclick="alterarQuantidade(-1)">-</button>
+                  <input type="number" id="quantidade" value="1" min="1" max="10">
+                  <button class="btn-quantidade" onclick="alterarQuantidade(1)">+</button>
+                </div>
+              </div>
+
+            <div class="checkout-actions">
+                <button id="comprar-agora">COMPRAR AGORA</button>
+                <button id="adicionar-carrinho">ADICIONAR AO CARRINHO</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Configura eventos
+        document.getElementById('comprar-agora').addEventListener('click', finalizarCompra);
+        document.getElementById('adicionar-carrinho').addEventListener('click', adicionarAoCarrinho);
+        
+        // Configura miniaturas
+        document.querySelectorAll('.miniatura').forEach(miniatura => {
+          miniatura.addEventListener('click', function() {
+            document.querySelector('.imagem-principal').src = this.src;
+            document.querySelectorAll('.miniatura').forEach(m => m.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      } else {
+        window.location.href = 'produtos.html';
+      }
+
+      // Carrega sugestões
+      const sugestoes = [
+        { nome: "Tênis Casual Premium", preco: "279.90", imagem: "../jpg/FB8-7940-024_zoom1.jpg" },
+        { nome: "Tênis Esportivo Elite", preco: "499.90", imagem: "../jpg/180_tenis_de_corrida_masculino_on_running_cloudmonster_void_silver_lense_12129_1_9166ba7a7f187922db483916f032fa60.jpg" },
+        { nome: "Tênis Corrida FastRun", preco: "329.90", imagem: "../jpg/packshot-codigo-modelo-8987576.jpg" }
+      ];
+
+      const sugestoesHTML = sugestoes.map(produto => `
+        <div class="sugestao-item" onclick="window.location.href='checkout.html?nome=${encodeURIComponent(produto.nome)}&preco=${encodeURIComponent(produto.preco)}&imagem=${encodeURIComponent(produto.imagem)}'">
+          <img src="${produto.imagem}" alt="${produto.nome}">
+          <h3>${produto.nome}</h3>
+          <p>R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}</p>
+        </div>
+      `).join('');
+
+      document.querySelector('.sugestoes-lista').innerHTML = sugestoesHTML;
+    });
+
+    function alterarQuantidade(valor) {
+      const input = document.getElementById('quantidade');
+      let novaQuantidade = parseInt(input.value) + valor;
+      if (novaQuantidade < 1) novaQuantidade = 1;
+      if (novaQuantidade > 10) novaQuantidade = 10;
+      input.value = novaQuantidade;
+    }
+
+    function finalizarCompra() {
+      const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+      if (!tamanhoSelecionado) {
+        alert('Selecione um tamanho!');
+        return;
+      }
+      window.location.href = 'comprar.html';
+    }
+
+    function adicionarAoCarrinho() {
+      const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+      if (!tamanhoSelecionado) {
+        alert('Selecione um tamanho!');
+        return;
+      }
+      window.location.href = 'carrinho.html';
+    }
+
+    function redirecionarParaPesquisa(event) {
+      event.preventDefault();
+      const termo = document.getElementById("campoPesquisa").value.trim();
+      if (termo) {
+        window.location.href = `pesquisa.html?q=${encodeURIComponent(termo)}`;
+      } else {
+        alert("Por favor, digite um termo de pesquisa!");
+      }
+    }
+
+    if (document.getElementById("campoPesquisa")) {
+      document.querySelector('.search-bar').addEventListener('submit', redirecionarParaPesquisa);
+    }
+  </script>
+</body>
+</html>

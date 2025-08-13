@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Loja</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="comprar.css">
+</head>
+<body>
+    <!-- Botão de voltar -->
+    <div class="voltar-container">
+        <a href="produtos.html" class="btn-voltar">
+            &larr; Voltar para Produtos
+        </a>
+    </div>
+
+    <div class="container-checkout">
+        <!-- COLUNA ESQUERDA -->
+        <main class="resumo-pedido">
+            <h1>Seu Pedido</h1>
+            
+            <div class="produto-checkout">
+                <img src="https://via.placeholder.com/80" alt="Tênis Esportivo">
+                <div>
+                    <h3>Tênis Esportivo Pro</h3>
+                    <p>Quantidade: 1</p>
+                    <p>R$ 299,90</p>
+                </div>
+            </div>
+            
+            <div class="produto-checkout">
+                <img src="https://via.placeholder.com/80" alt="Meias Esportivas">
+                <div>
+                    <h3>Meias Esportivas</h3>
+                    <p>Quantidade: 2</p>
+                    <p>R$ 49,90</p>
+                </div>
+            </div>
+            
+            <div class="total-pedido">
+                <h2>Resumo do Pedido</h2>
+                <div class="linha-total">
+                    <span>Subtotal:</span>
+                    <span>R$ 399,70</span>
+                </div>
+                <div class="linha-total">
+                    <span>Frete:</span>
+                    <span>R$ 15,00</span>
+                </div>
+                <div class="linha-total destaque">
+                    <span>Total:</span>
+                    <span>R$ 414,70</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- COLUNA DIREITA -->
+        <aside class="form-pagamento">
+            <h2>Pagamento</h2>
+            
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" required>
+            </div>
+            
+            <div class="metodo-pagamento">
+                <h3>Método de Pagamento</h3>
+                
+                <div class="opcao-pagamento ativo">
+                    <input type="radio" name="pagamento" id="pix" checked>
+                    <label for="pix">PIX (5% de desconto)</label>
+                </div>
+                
+                <div class="opcao-pagamento">
+                    <input type="radio" name="pagamento" id="cartao">
+                    <label for="cartao">Cartão de Crédito</label>
+                </div>
+                
+                <div class="opcao-pagamento">
+                    <input type="radio" name="pagamento" id="boleto">
+                    <label for="boleto">Boleto Bancário</label>
+                </div>
+            </div>
+            
+            <button class="btn-finalizar">Finalizar Compra</button>
+        </aside>
+    </div>
+
+    <script>
+        // Seletor de método de pagamento (versão otimizada)
+        document.querySelectorAll('.opcao-pagamento').forEach(opcao => {
+            opcao.addEventListener('click', function(e) {
+                if(e.target.tagName === 'INPUT') return;
+                
+                document.querySelectorAll('.opcao-pagamento').forEach(o => {
+                    o.classList.remove('ativo');
+                });
+                
+                this.classList.add('ativo');
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+    </script>
+</body>
+</html>

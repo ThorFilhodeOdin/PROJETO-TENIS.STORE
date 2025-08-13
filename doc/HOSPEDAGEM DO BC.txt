@@ -1,0 +1,198 @@
+-----------1. Desenvolvimento e Configuração do Banco de Dados
+Primeiro, você vai criar o banco de dados localmente ou em um servidor de desenvolvimento. Por exemplo, se estiver usando MySQL ou PostgreSQL, você pode fazer isso diretamente na sua IDE de SQL ou em uma ferramenta de gerenciamento (como MySQL Workbench, pgAdmin, etc.).
+
+
+-----------2. Escolhendo o Tipo de Banco de Dados
+Para colocar o banco de dados "no ar", você geralmente escolhe entre dois tipos:
+
+Banco de Dados Relacional (SQL): Como MySQL, PostgreSQL, MariaDB, etc.
+Banco de Dados Não Relacional (NoSQL): Como MongoDB, Firebase, etc.
+
+Esses bancos precisam de um servidor de banco de dados para estarem disponíveis para o seu site. Isso não vai acontecer diretamente da sua IDE SQL, pois o banco precisa estar acessível online para o servidor web (que hospeda o site) fazer consultas ao banco.
+
+
+-----------3. Hospedando o Banco de Dados
+Você não pode simplesmente usar a IDE do SQL para hospedar o banco de dados. Você precisará de uma plataforma de hospedagem para isso. Alguns exemplos incluem:
+
+Hospedagem de Banco de Dados na Nuvem:
+AWS RDS (Amazon Web Services)
+Google Cloud SQL
+Azure SQL Database
+DigitalOcean Managed Databases
+Heroku Postgres (para projetos menores, é uma opção simples)
+
+Essas plataformas oferecem servidores dedicados para hospedar bancos de dados, com a vantagem de você não precisar se preocupar com a manutenção do servidor físico.
+Hospedagem de Banco de Dados em Servidores Locais ou VPS: Se você tem um servidor dedicado ou VPS, pode instalar o banco de dados manualmente e conectá-lo ao seu site.
+
+
+-----------4. Conectar o Banco de Dados ao Site
+Quando o banco de dados está hospedado, seu site vai se conectar a ele através de uma URL de conexão. Isso é feito normalmente com um driver de banco de dados na linguagem que você está usando no seu site (PHP, Node.js, Python, etc.).
+
+Por exemplo:
+PHP usa mysqli ou PDO para conectar ao MySQL.
+Node.js usa pacotes como mysql ou pg para conectar ao banco de dados.
+Python usa bibliotecas como pymysql ou psycopg2 para MySQL ou PostgreSQL.
+
+No código do seu site, você vai configurar a string de conexão com o banco de dados hospedado, que vai incluir informações como:
+
+Endereço do servidor de banco de dados
+Nome de usuário
+Senha
+Nome do banco de dados
+
+Exemplo de uma string de conexão (em PHP para MySQL):
+php
+$host = 'meu_servidor_banco.com';
+$usuario = 'meu_usuario';
+$senha = 'minha_senha';
+$nome_banco = 'meu_banco';
+$conexao = new mysqli($host, $usuario, $senha, $nome_banco);
+
+
+-----------5. Hospedando o Site
+Depois de ter o banco de dados pronto e configurado, o próximo passo é hospedar o site em si. Você pode usar uma plataforma de hospedagem web como:
+
+Shared Hosting: Empresas como Hostgator, Locaweb, ou GoDaddy.
+
+VPS ou Servidor Dedicado: Para mais controle, você pode usar serviços como 
+DigitalOcean, Linode ou AWS EC2.
+
+Hospedagem de Sites Estáticos: Se o seu site é estático, plataformas como Netlify ou Vercel podem ser úteis.
+
+Plataformas PaaS: Como Heroku, onde você pode hospedar tanto o site quanto o banco de dados em um ambiente fácil de configurar.
+
+
+-----------6. Segurança
+É importante considerar a segurança do seu banco de dados:
+
+Firewall: Configure um firewall para proteger seu banco de dados.
+
+SSL/TLS: Use criptografia SSL para proteger as informações transmitidas entre o site e o banco de dados.
+
+Backups: Configure backups regulares do banco de dados para evitar perdas de dados.
+
+
+
+
+
+
+
+
+-------------------------------------------------------------
+
+
+
+
+
+
+
+https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1710136-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_512285710746-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-General-KWID_43700062788251479-kwd-299550436966&utm_term=KW_google+cloud+platform-ST_Google+Cloud+Platform&gclsrc=aw.ds&gad_source=1&gad_campaignid=12684552135&gclid=EAIaIQobChMIu9S0wYXOjgMVvp3uAR07ixJlEAAYASAAEgKhTvD_BwE&hl=pt_br
+
+
+BANCO DE DADOS FEITO  google cloud sql
+
+SERVIDOR NOSSO TEM O BC
+
+GOOGLE CLOUD
+
+banco-tenisstore
+26052006Rr@
+
+
+homem digao
+2605
+
+
+
+
+-------------------------------
+
+
+
+                --REGRAS DO BC--
+
+
+***IMAGENS
+
+
+
+Tabela: Categorias
+Essa tabela vai armazenar as categorias de tênis disponíveis na loja (ex: esportivo, casual, feminino, masculino, etc).
+CREATE TABLE Categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome_categoria VARCHAR(255) NOT NULL
+);
+
+
+Tabela: Produtos
+Aqui, você terá as informações sobre os tênis, como o nome, preço, quantidade, categoria (relacionada à tabela Categorias), e outros detalhes.
+CREATE TABLE Produtos (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_produto VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    preco DECIMAL(10, 2) NOT NULL,
+    quantidade_estoque INT NOT NULL,
+    id_categoria INT,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
+);
+
+
+Tabela: Clientes
+Essa tabela vai armazenar informações sobre os clientes da loja.
+CREATE TABLE Clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    cpf INT NOT NULL,
+    nome_cliente VARCHAR(255) NOT NULL,
+    email_cliente VARCHAR(255) UNIQUE NOT NULL,
+    telefone_cliente VARCHAR(15),
+    endereco_cliente TEXT
+);
+
+
+Tabela: Vendas
+Registra as vendas realizadas na loja. Cada venda pode ter vários itens (produtos).
+CREATE TABLE Vendas (
+    id_venda INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT,
+    data_venda DATETIME NOT NULL,
+    total_venda DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
+);
+
+
+Tabela: Itens_Venda
+Essa tabela vai associar os produtos vendidos a uma venda específica, com a quantidade e o preço de cada item.
+CREATE TABLE Itens_Venda (
+    id_item_venda INT AUTO_INCREMENT PRIMARY KEY,
+    id_venda INT,
+    id_produto INT,
+    quantidade INT NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_venda) REFERENCES Vendas(id_venda),
+    FOREIGN KEY (id_produto) REFERENCES Produtos(id_produto)
+);
+        
+
+
+
+-----------------------
+
+
+. Exemplos de dados
+
+Esportivo  
+ Casual 
+ Feminino
+ Masculino
+
+Produtos:
+ Tênis Nike Air Zoom (preço: 499.99, categoria: Esportivo)
+ Tênis Adidas Superstar (preço: 299.99, categoria: Casual)
+ Tênis Mizuno Wave (preço: 399.99, categoria: Esportivo)
+
+Clientes:
+ João Silva (email: joao@example.com)
+ Maria Oliveira (email: maria@example.com)
+
+Vendas:
+ João Silva comprou 2 pares de tênis: Nike Air Zoom (quantidade 1) e Adidas Superstar (quantidade 1).

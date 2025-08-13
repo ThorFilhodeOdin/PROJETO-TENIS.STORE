@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos - TenisStore</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav class="menu">
+      <div class="logo" onclick="window.location.href='produtos.html'">TenisStore</div>
+      <ul class="nav-links">
+        <li><a href="carrinho.html">Carrinho</a></li>
+        <li><a href="usuario.html">Usuário</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Meus Pedidos</h1>
+    <div class="order-list">
+      <div class="order-card">
+        <div class="order-header">
+          <span class="order-number">Pedido #xxx</span>
+          <span class="order-status status-shipping">A caminho</span>
+          <span class="order-date">xx/xx/xxxx</span>
+        </div>
+        
+        <div class="order-products">
+          <div class="product-item">
+            <img src="image/FB9-8539-036_zoom1.jpg">
+            <div class="product-details">
+              <h3>Tênis xxxxx</h3>
+              <p>Quantidade: x</p>
+              <p>R$ xxx,xx</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-total">
+          <p>Total: R$ x</p>
+          <button class="btn-track">Acompanhar Pedido</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
