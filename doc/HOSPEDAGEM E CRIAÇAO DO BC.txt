@@ -75,36 +75,6 @@ Backups: Configure backups regulares do banco de dados para evitar perdas de dad
 
 
 
-
-
-
--------------------------------------------------------------
-
-
-
-
-
-
-
-https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1710136-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_512285710746-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-General-KWID_43700062788251479-kwd-299550436966&utm_term=KW_google+cloud+platform-ST_Google+Cloud+Platform&gclsrc=aw.ds&gad_source=1&gad_campaignid=12684552135&gclid=EAIaIQobChMIu9S0wYXOjgMVvp3uAR07ixJlEAAYASAAEgKhTvD_BwE&hl=pt_br
-
-
-BANCO DE DADOS FEITO  google cloud sql
-
-SERVIDOR NOSSO TEM O BC
-
-GOOGLE CLOUD
-
-banco-tenisstore
-26052006Rr@
-
-
-homem digao
-2605
-
-
-
-
 -------------------------------
 
 
