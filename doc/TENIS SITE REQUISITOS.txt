@@ -10,5 +10,3 @@
 4- criar um back end q processe e altere dados no banco de dados pelo site 
 5- relacionar bc com back 
 6- tornar o site funcional com (login, operaçoes no banco e segurança)
-7- nao to achando nome na pesquisa do google
-
