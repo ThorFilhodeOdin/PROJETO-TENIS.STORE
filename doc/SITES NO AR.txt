@@ -1,0 +1,262 @@
+ 
+CUSTO ESTIMADO:
+- Servidor: R$50-150/mês
+- Domínio: R$40/ano
+- Banco de Dados: R$0-200/mês
+
+
+
+
+
+
+
+                                   ----ROADMAP----
+
+
+
+
+
+----1. Criar o Código (Front-end e Back-end)
+
+
+
+----2. Comprar e Pre Configurar o Domínio
+Você pode comprar o domínio em provedores como GoDaddy, Namecheap, Google Domains, etc.
+Configurar o domínio no seu servidor de hospedagem: Para isso, você precisa configurar os registros DNS (como A e CNAME) para apontar para o seu servidor de hospedagem ou plataforma de cloud. 
+A configuração varia de acordo com o provedor de hospedagem, mas geralmente, você precisa inserir o IP do servidor na plataforma onde comprou o domínioe fazer o CNAME, os dois se complementam.
+
+
+
+----3. Hospedar os Arquivos (Front-end, Back-end e Banco de Dados) e Configurar Dominio
+
+-Frontend (Arquivos Estáticos):
+Você pode hospedar os arquivos estáticos (HTML, CSS, JS, imagens, fontes) em um servidor de hospedagem tradicional ou até mesmo em serviços especializados para arquivos estáticos como Netlify, Vercel ou git hub).
+
+-Backend (Servidor de Aplicação): 
+Seu backend deve ser hospedado em um servidor que pode rodar a aplicação (Node.js, Python, Ruby, etc.). Ao subir o backend, você precisa configurar o servidor (como instalar as dependências, configurar variáveis de ambiente, etc.). Depois entrelaçar com front end e banco de dados
+
+-Banco de Dados: 
+O banco de dados pode ser hospedado no mesmo servidor que o back-end ou em um serviço separado (como Amazon RDS, Google Cloud SQL, ou DigitalOcean Databases).
+Se você colocar o banco de dados no mesmo servidor, precisa garantir que a configuração do servidor tenha recursos suficientes (memória, CPU, etc.) para suportar ambos, o backend e o banco de dados. Depois entrelaçar banco e back.
+
+-Configurar dominio por completo:
+entrelaçar ips e cname
+
+
+
+----4. Políticas de Segurança
+
+SSL/TLS: Certificado de segurança para criptografar dados entre o usuário e o servidor. Isso é obrigatório para garantir que as informações trafeguem de forma segura. Certificados SSL podem ser adquiridos ou até mesmo obter gratuitamente via Let's Encrypt.
+
+Firewall e Proteção de Rede: Configure firewalls tanto no servidor de hospedagem quanto na configuração de rede (por exemplo, AWS Security Groups).
+
+Autenticação e Autorização: Sempre proteja áreas sensíveis com autenticação (usuário/senha) e, se necessário, autorização baseada em papéis (roles).
+
+Backup de Dados: Ter um sistema de backup regular do banco de dados e arquivos importantes. Pode ser feito manualmente ou automatizado com scripts ou serviços de backup em nuvem.
+
+Monitoramento e Logs: Implante sistemas de monitoramento de segurança e logs (por exemplo, usando ferramentas como ELK Stack, Prometheus, ou serviços como Datadog). Isso ajuda a detectar atividades suspeitas.
+
+-Proteção contra Ataques Comuns:
+SQL Injection: Sempre use consultas parametrizadas ou ORMs para evitar injeções de SQL.
+Cross-Site Scripting (XSS): Escape corretamente todos os inputs de usuários.
+Cross-Site Request Forgery (CSRF): Utilize tokens CSRF para validar solicitações.
+
+
+
+----5. Testes e Validação
+Antes de ir para produção, é importante garantir que tudo esteja funcionando corretamente. Realize testes:
+Testes de performance e carga (por exemplo, com o Apache Benchmark ou locust.io).
+Testes de segurança (ferramentas como OWASP ZAP ou Burp Suite).
+Testes de usabilidade (certifique-se de que a experiência do usuário está boa em diversos dispositivos e navegadores).
+
+
+
+----6. Colocar o Site no Ar
+Agora, com tudo configurado e testado, é hora de:
+Subir o código para o servidor de hospedagem.
+Fazer a configuração final do banco de dados e o ambiente de produção.
+Realizar a configuração do domínio e garantir que o SSL está funcionando.
+Monitorar o site ao vivo para garantir que tudo funcione bem e que os usuários não encontrem erros.
+Google search e dns cheker
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+                     --CONFIGURANDO DOMINIO (CNAME E IPS)---
+
+
+O cname deve ssempre ser o primeiro a ser configurado
+
+
+1. CNAME (Canonical Name):
+O registro CNAME serve para mapear um nome de domínio para outro, basicamente fazendo com que seu domínio (exemplo: www.seudominio.com) aponte para outro domínio (exemplo: seudominio.hostingprovider.com).
+Se você está utilizando um domínio personalizado, o CNAME pode ser usado para redirecionar o tráfego para o provedor de hospedagem. Ele é essencial quando seu provedor de hospedagem usa subdomínios para identificar sites (como "seudominio.hostingprovider.com").
+
+2. Registros A (ou AAAA):
+Registros A apontam um nome de domínio para um endereço IP específico (IPv4). Se você estiver configurando seu domínio para apontar diretamente para um servidor, esse registro A é crucial.
+O registro A é o principal meio de vinculação entre o nome de domínio e o servidor de hospedagem, pois ele direciona o tráfego para o IP correto.
+Caso seu provedor de hospedagem ofereça IPv6, o registro AAAA também será necessário.
+Se faltar um ou outro:
+
+Falta de CNAME: Se não configurar corretamente o CNAME, o subdomínio não será mapeado corretamente, e o site pode não funcionar ou direcionar para o lugar errado.
+Falta de registros A/AAAA: Se não configurar corretamente o registro de IP, o domínio não saberá para onde direcionar os visitantes e seu site ficará inacessível.
+
+Exemplos:
+
+CNAME para o subdomínio www:
+Host: www
+Aponta para: thorfilhodeodin.github.io.
+
+Registros A para o domínio sem www:
+Host: @
+Aponta para:
+(ips exemplos no caso do git hub)
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+
+
+
+
+Passo a Passo:
+
+
+1️⃣ Adicionar um arquivo CNAME no seu repositório
+É necessário criar um arquivo chamado CNAME (sem extensão) no repositório onde o seu site está hospedado.
+Crie um arquivo chamado CNAME na raiz do seu repositório.
+O arquivo CNAME precisa conter apenas o nome do seu domínio (sem http://)
+www.lojatenisstorethor.com.br
+Comite e envie o arquivo CNAME para o seu repositório.
+ 
+
+2️⃣ Configurar o DNS no seu provedor de domínio
+Agora, você precisa configurar os registros DNS do seu domínio para apontar para os servidores.
+Adicionando os registros DNS:
+Acesse o painel de controle do seu provedor de domínio (como GoDaddy, Namecheap, Registro.br, etc.).
+Procure pela área de gerenciamento de DNS (geralmente chamada de DNS Settings ou Gerenciar DNS).
+
+Registro A (para apontar para o GitHub):
+Nome: @ ou deixe em branco (depende do provedor).
+Tipo: A.
+Valor: 185.199.108.153
+Repetir esse registro para os outros IPs do GitHub:
+185.199.109.153
+185.199.110.153
+185.199.111.153
+(Esses IPs são padrões do GitHub Pages, usados para todos os sites que hospedam conteúdo no GitHub Pages via domínio raiz (sem www).)
+
+Registro CNAME:
+Nome: www.
+Tipo: CNAME.
+Valor: thorfilhodeodin.github.io (isso deve ser o endereço do seu repositório, sem https://).
+Exemplo:
+CNAME para www apontando para seu-usuario.github.io.
+Atenção:
+Os registros A apontam para os IPs do GitHub e são usados para quando alguém acessar seu domínio sem www (ex: meudominio.com.br).
+O CNAME é para quando alguém acessar com www (ex: www.meudominio.com.br).
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+                             --GOOGLE SEARCH---
+
+
+O Google Search Console (antigamente conhecido como Google Webmaster Tools) é uma ferramenta gratuita oferecida pelo Google para ajudar webmasters, profissionais de SEO e desenvolvedores a monitorar, manter e solucionar problemas relacionados à presença de um site nos resultados de busca do Google.
+
+
+----Principais funções do Google Search Console:
+Verificar o desempenho no Google Search
+Mostra dados de impressões, cliques, CTR (taxa de cliques) e posição média para palavras-chave.
+Permite filtrar por consultas, páginas, países e dispositivos.
+Identificar e corrigir erros de rastreamento
+Alertas sobre páginas com problemas (404, bloqueios no robots.txt, erros de indexação).
+Relatórios de cobertura de indexação (quais páginas estão ou não no índice do Google).
+Enviar e monitorar sitemaps
+Permite enviar um sitemap (XML) para ajudar o Google a descobrir e indexar páginas.
+Verificar links internos e externos
+Mostra quais sites estão vinculando ao seu conteúdo (backlinks).
+Analisa a estrutura de links internos.
+Otimização para dispositivos móveis e Core Web Vitals
+Identifica problemas de usabilidade em mobile.
+Mostra métricas de desempenho (velocidade de carregamento, experiência do usuário).
+Solicitar reindexação de páginas
+Útil após atualizações no site para avisar o Google sobre mudanças.
+Proteção contra spam e manual actions
+Notifica se o site foi penalizado por práticas antiéticas de SEO.
+
+Como acessar?
+Acesse https://search.google.com/search-console
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+                        --CONFIGURANDO ICON DO SITE---
+
+Gera e Verifica:
+https://realfavicongenerator.net/
+
+
+Insert the following code in the <head> section of your pages:
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+
+  <link rel="icon" href="/icon/favicon.ico" type="image/x-icon">
+  <!-- Favicon para Android -->
+  <link rel="icon" sizes="192x192" href="/icon/android-chrome-192x192.png">
+  <!-- Favicon para dispositivos Apple (iOS) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+  <link rel="icon" href="/icon/favicon-32x32.png" sizes="32x32" type="image/png">
+
+
+
+
+
+
+
+
+
+
